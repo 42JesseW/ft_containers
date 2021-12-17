@@ -45,6 +45,7 @@ namespace ft {
 	RandomAccessIterator<T, Category>	RandomAccessIterator<T, Category>::operator ++ (int)
 	{
 		RandomAccessIterator<T, Category>	ret(*this);
+
 		_ptr++;
 		return (ret);
 	}
@@ -62,6 +63,7 @@ namespace ft {
 	RandomAccessIterator<T, Category>	RandomAccessIterator<T, Category>::operator -- (int)
 	{
 		RandomAccessIterator<T, Category>	ret(*this);
+
 		_ptr--;
 		return (ret);
 	}

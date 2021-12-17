@@ -53,7 +53,7 @@ namespace ft {
 	{
 		if (this != &rhs)
 		{
-			if (rhs.size() > _capacity || rhs.size() < _size)	// TODO testcase (3)
+			if (rhs.size() > _capacity || rhs.size() < _size)
 				this->resize(rhs.size());
 			for (size_type i = 0; i < rhs.size(); ++i)
 				_allocator.construct(_array + i, rhs[i]);
@@ -103,7 +103,7 @@ namespace ft {
 	template <class T, class Allocator>
 	typename vector<T, Allocator>::reverse_iterator	vector<T, Allocator>::rbegin()
 	{
-		return (reverse_iterator(_array + (_size - 1)));
+		return (reverse_iterator(end() - 1));
 	}
 
 	template <class T, class Allocator>
@@ -115,7 +115,7 @@ namespace ft {
 	template <class T, class Allocator>
 	typename vector<T, Allocator>::reverse_iterator			vector<T, Allocator>::rend()
 	{
-		return (reverse_iterator(_array - 1));
+		return (reverse_iterator(begin() - 1));
 	}
 
 	template <class T, class Allocator>
@@ -383,7 +383,7 @@ namespace ft {
 		    tmp.push_back(this->back());
 		    this->pop_back();
         }
-		for (int idx = n; idx > 0; --idx)
+		for (size_t i = n; i > 0; --i)
 		    this->pop_back();
         while (!tmp.empty())
         {

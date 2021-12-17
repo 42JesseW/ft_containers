@@ -33,10 +33,38 @@ namespace ft {
         bool			operator != (const self_type &rhs);
         reference		operator * ();
         pointer			operator -> ();
-        self_type		operator ++ (int);	// overload postfix ++
-        self_type&		operator ++ ();		// overload prefix ++
-        self_type		operator -- (int);	// overload postfix --
-        self_type&		operator -- ();		// overload prefix --
+        self_type		operator ++ (int);
+        self_type&		operator ++ ();
+        self_type		operator -- (int);
+        self_type&		operator -- ();
+
+    };
+
+    template <class T, class Category = std::bidirectional_iterator_tag>
+    class ConstBidirectionalIterator : public ConstRandomAccessIterator<T, Category>
+    {
+    public:
+        typedef T						                value_type;
+        typedef value_type&				                reference;
+        typedef value_type*				                pointer;
+        typedef size_t					                size_type;
+        typedef ConstRandomAccessIterator<T, Category>  iter;
+        typedef ConstBidirectionalIterator              self_type;
+
+    public:
+        /* constructors */
+        ConstBidirectionalIterator();
+        explicit ConstBidirectionalIterator(pointer elem);
+        ConstBidirectionalIterator(const self_type &x);
+
+        /* destructors */
+        virtual ~ConstBidirectionalIterator();
+
+        /* operators */
+        self_type&		operator = (const self_type &rhs);
+        self_type&		operator = (const BidirectionalIterator<T, Category> &rhs);
+        reference		operator * ();
+        pointer			operator -> ();
 
     };
 

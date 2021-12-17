@@ -7,6 +7,7 @@
 # include <iostream>
 # include <stdexcept>
 # include <IteratorTraits.hpp>
+# include <ReverseIterator.hpp>
 # include <RandomAccessIterator.hpp>
 
 namespace ft {
@@ -26,10 +27,9 @@ namespace ft {
 
 		typedef RandomAccessIterator<T>			iterator;
 		typedef ConstRandomAccessIterator<T>	const_iterator;
-		typedef RevRandomAccessIterator<T>		reverse_iterator;
 		typedef ConstRevRandomAccessIterator<T>	const_reverse_iterator;
 // TODO implement reverse_iterator template:    https://www.cplusplus.com/reference/iterator/reverse_iterator/
-//        typedef reverse_iterator<iterator>		reverse_iterator;
+        typedef reverse_iterator<iterator>		reverse_iterator;
 //        typedef reverse_iterator<const_iterator>	const_reverse_iterator;
 
 		typedef ptrdiff_t						difference_type;
@@ -46,8 +46,10 @@ namespace ft {
 		// https://stackoverflow.com/questions/121162/what-does-the-explicit-keyword-mean
 
 		/* constructors */
-		explicit vector (const allocator_type& alloc = allocator_type());
-		explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type());
+		explicit vector(const allocator_type& alloc = allocator_type());
+		explicit vector(size_type n,
+                        const value_type& val = value_type(),
+                        const allocator_type& alloc = allocator_type());
 
 		/*
 		** Constructs a container with as many elements as the range [first,last), with
@@ -55,10 +57,10 @@ namespace ft {
 		** same order.
 		*/
 		template <class InputIterator>
-		vector (InputIterator first,
-		  		InputIterator last,
-		  		typename iterator_traits<InputIterator>::type* = 0,
-		  		const allocator_type& alloc = allocator_type()) : _size(0), _allocator(alloc)
+		vector(InputIterator first,
+               InputIterator last,
+               typename iterator_check<InputIterator>::type* = 0,
+               const allocator_type& alloc = allocator_type()) : _size(0), _allocator(alloc)
 		{
 			difference_type	size;
 
@@ -106,9 +108,9 @@ namespace ft {
 
 		/* modifiers */
 		template <class InputIterator>
-		void								assign (InputIterator first,
-													InputIterator last,
-													typename iterator_traits<InputIterator>::type* = 0)
+		void								assign(InputIterator first,
+                                                   InputIterator last,
+                                                   typename iterator_check<InputIterator>::type* = 0)
 		{
 			clear();
 			reserve(last - first);
@@ -118,13 +120,13 @@ namespace ft {
 		void								assign(size_type n, const value_type& val);
 		void								push_back(const value_type& val);
 		void								pop_back();
-		iterator							insert (iterator position, const value_type& val);
-		void								insert (iterator position, size_type n, const value_type& val);
+		iterator							insert(iterator position, const value_type& val);
+		void								insert(iterator position, size_type n, const value_type& val);
 		template <class InputIterator>
-		void								insert (iterator position,
-													InputIterator first,
-													InputIterator last,
-													typename iterator_traits<InputIterator>::type* = 0)
+		void								insert(iterator position,
+                                                   InputIterator first,
+                                                   InputIterator last,
+                                                   typename iterator_check<InputIterator>::type* = 0)
 		{
 		    iterator  start;
 		    iterator  end;

@@ -6,6 +6,7 @@
 # include <memory>
 # include <functional>
 
+# include <ReverseIterator.hpp>
 # include <BidirectionalIterator.hpp>
 
 namespace ft {
@@ -31,9 +32,9 @@ namespace ft {
         typedef typename allocator_type::pointer                    pointer;
         typedef typename allocator_type::const_pointer              const_pointer;
         typedef BidirectionalIterator<value_type>                   iterator;
-        // typedef BidirectionalIterator<const value_type>          const_iterator
-        // typedef reverse_iterator<iterator>                       reverse_iterator
-        // typedef reverse_iterator<const_iterator>                 const_reverse_iterator
+        typedef ConstBidirectionalIterator<const value_type>        const_iterator;
+        typedef reverse_iterator<iterator>                          reverse_iterator;
+        //typedef reverse_iterator<const_iterator>                    const_reverse_iterator;
         typedef ptrdiff_t                                           difference_type;
         typedef size_t                                              size_type;
 
