@@ -58,7 +58,7 @@ namespace ft {
 		vector (InputIterator first,
 		  		InputIterator last,
 		  		typename iterator_traits<InputIterator>::type* = 0,
-		  		const allocator_type& alloc = allocator_type()) : _allocator(alloc), _size(0)
+		  		const allocator_type& alloc = allocator_type()) : _size(0), _allocator(alloc)
 		{
 			difference_type	size;
 
@@ -126,10 +126,10 @@ namespace ft {
 													InputIterator last,
 													typename iterator_traits<InputIterator>::type* = 0)
 		{
-		    iterator        start;
-		    iterator        end;
-			size_type       n;
-		    difference_type idx;
+		    iterator  start;
+		    iterator  end;
+			size_type n;
+		    size_type idx;
 
 		    n = last - first;
 		    _size += n;
@@ -139,7 +139,7 @@ namespace ft {
 			    this->reserve(_get_next_capacity());
 			if (idx != (_size - n))
             {
-			    end = begin() + idx + (n * 2);
+			    end = begin() + idx + (n * 2) + 1;
 			    start = begin() + idx + n;
 			    while (start != end)
                 {

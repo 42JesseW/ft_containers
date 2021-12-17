@@ -37,7 +37,7 @@ protected:
 
 	virtual void	check_array_data_equal() {
 		check_members_equal();
-		for (int i = 0; i < _my_vector->size(); i++)
+		for (size_t i = 0; i < _my_vector->size(); i++)
 			EXPECT_EQ(_their_vector->at(i), _my_vector->at(i));
 	}
 };
@@ -92,10 +92,12 @@ class VectorOperator : public VectorConstruction
 };
 
 TEST_F(VectorOperator, OutOfBounds) {
-	EXPECT_EXIT(int value = (*_my_vector)[0], ::testing::KilledBySignal(SIGSEGV), "");
-	EXPECT_EXIT(int value = _my_vector->at(0), ::testing::KilledBySignal(SIGSEGV), "");
+    int value;
+
+	EXPECT_EXIT( value = (*_my_vector)[0], ::testing::KilledBySignal(SIGSEGV), "");
+	EXPECT_EXIT( value = _my_vector->at(0), ::testing::KilledBySignal(SIGSEGV), "");
 	_my_vector = new ft::vector<int>(_test_size);
-	EXPECT_THROW(int value = _my_vector->at(_test_size + 1), std::out_of_range);
+	EXPECT_THROW( value = _my_vector->at(_test_size + 1), std::out_of_range);
 }
 
 TEST_F(VectorOperator, Assignment) {
@@ -306,11 +308,11 @@ TEST_F(VectorModifiers, assignRange) {
     auto *my_vec    = new ft::vector<std::string>();
 
     std::vector<std::string>    fillWith(_test_size);
-    for (int i = 0; i < fillWith.size(); ++i)
+    for (size_t i = 0; i < fillWith.size(); ++i)
         fillWith[i] = std::to_string(i);
     their_vec->assign(fillWith.begin(), fillWith.end());
     my_vec->assign(fillWith.begin(), fillWith.end());
-    for (int i = 0; i < my_vec->size(); ++i)
+    for (size_t i = 0; i < my_vec->size(); ++i)
         EXPECT_EQ(their_vec->at(i), my_vec->at(i));
     EXPECT_EQ(their_vec->size(), my_vec->size());
     EXPECT_EQ(their_vec->capacity(), my_vec->capacity());
@@ -338,11 +340,11 @@ TEST_F(VectorModifiers, push_back) {
     _my_vector		= new ft::vector<int>();
 
     for (int j = 0; j < 4; j++) {
-        for (int i = 0; i < (_test_size * 0.5); i++) {
+        for (size_t i = 0; i < (_test_size * 0.5); i++) {
             _my_vector->push_back(i);
             _their_vector->push_back(i);
         }
-        for (int i = 0; i < (_test_size * 0.25); i++) {
+        for (size_t i = 0; i < (_test_size * 0.25); i++) {
             _my_vector->pop_back();
             _their_vector->pop_back();
         }

@@ -19,10 +19,10 @@ TEST_F(RandomAccessFixture, Forward)
     size_t						idx;
 
     ft_vec.reserve(test_size);
-    for (int i = 0; i < test_size; i++)
+    for (size_t i = 0; i < test_size; i++)
         ft_vec.push_back(i);
     std_vec.reserve(test_size);
-    for (int i = 0; i < test_size; i++)
+    for (size_t i = 0; i < test_size; i++)
         std_vec.push_back(i);
     EXPECT_EQ(*(ft_vec.begin()), *(std_vec.begin()));
     EXPECT_EQ(*(ft_vec.end()), *(std_vec.end()));
@@ -47,10 +47,10 @@ TEST_F(RandomAccessFixture, ForwardConst)
     size_t								idx;
 
     ft_vec.reserve(test_size);
-    for (int i = 0; i < test_size; i++)
+    for (size_t i = 0; i < test_size; i++)
         ft_vec.push_back(i);
     std_vec.reserve(test_size);
-    for (int i = 0; i < test_size; i++)
+    for (size_t i = 0; i < test_size; i++)
         std_vec.push_back(i);
     EXPECT_EQ(*(ft_vec.begin()), *(std_vec.begin()));
     EXPECT_EQ(*(ft_vec.end()), *(std_vec.end()));
@@ -75,10 +75,10 @@ TEST_F(RandomAccessFixture, Reverse)
     size_t								idx;
 
     ft_vec.reserve(test_size);
-    for (int i = 0; i < test_size; i++)
+    for (size_t i = 0; i < test_size; i++)
         ft_vec.push_back(i);
     std_vec.reserve(test_size);
-    for (int i = 0; i < test_size; i++)
+    for (size_t i = 0; i < test_size; i++)
         std_vec.push_back(i);
     EXPECT_EQ(*(ft_vec.rbegin()), *(std_vec.rbegin()));
     EXPECT_EQ(*(ft_vec.rend()), *(std_vec.rend()));
@@ -103,10 +103,10 @@ TEST_F(RandomAccessFixture, ReverseConst)
     size_t										idx;
 
     ft_vec.reserve(test_size);
-    for (int i = 0; i < test_size; i++)
+    for (size_t i = 0; i < test_size; i++)
         ft_vec.push_back(i);
     std_vec.reserve(test_size);
-    for (int i = 0; i < test_size; i++)
+    for (size_t i = 0; i < test_size; i++)
         std_vec.push_back(i);
     EXPECT_EQ(*(ft_vec.rbegin()), *(std_vec.rbegin()));
     EXPECT_EQ(*(ft_vec.rend()), *(std_vec.rend()));

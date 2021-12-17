@@ -30,6 +30,9 @@ namespace ft {
     BidirectionalIterator<T, Category>& BidirectionalIterator<T, Category>::operator = (const self_type &rhs)
     {
 
+        if (this != &rhs)
+            this->_ptr = rhs.getPointer();
+        return (*this);
     }
 
     template <class T, class Category>

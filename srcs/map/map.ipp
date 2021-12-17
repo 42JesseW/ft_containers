@@ -5,6 +5,7 @@ namespace ft {
     template <class Key, class T, class Compare, class Alloc>
     map<Key, T, Compare, Alloc>::map(const key_compare& comp, const allocator_type& alloc) :
         _size(0),
+        _key_comp(comp),
         _allocator(alloc),
         _root(NULL) // TODO check for nullptr (c++11) in the codebase
     {
@@ -41,11 +42,11 @@ namespace ft {
         return (_allocator);
     }
 
-    template <class Key, class T, class Compare, class Alloc>
-    std::pair<typename map<Key, T, Compare, Alloc>::iterator, bool>     map<Key, T, Compare, Alloc>::insert(const value_type &val)
-    {
-        // TODO fix the insert! :)
-    }
+//    template <class Key, class T, class Compare, class Alloc>
+//    std::pair<typename map<Key, T, Compare, Alloc>::iterator, bool>     map<Key, T, Compare, Alloc>::insert(const value_type &val)
+//    {
+//        // TODO fix the insert! :)
+//    }
 
     template <class Key, class T, class Compare, class Alloc>
     typename map<Key, T, Compare, Alloc>::key_compare       map<Key, T, Compare, Alloc>::key_comp() const

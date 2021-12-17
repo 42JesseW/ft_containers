@@ -307,9 +307,9 @@ namespace ft {
 	template <class T, class Allocator>
 	void											vector<T, Allocator>::insert(iterator position, size_type n, const value_type &val)
 	{
-		iterator		start;
-		iterator		end;
-		difference_type	idx;
+		iterator	start;
+		iterator	end;
+		size_type	idx;
 
 		_size += n;
 		idx = position - begin();
@@ -319,7 +319,7 @@ namespace ft {
 		/* if insert is not at end, move all elements before it first */
 		if (idx != (_size - n))
 		{
-			end = begin() + idx + (n * 2);
+			end = begin() + idx + (n * 2) + 1;
 			start = begin() + idx + n;
 			while (start != end)
 			{
@@ -342,7 +342,7 @@ namespace ft {
 	typename vector<T, Allocator>::iterator		vector<T, Allocator>::erase(iterator position)
 	{
 		vector<T, Allocator>    tmp;
-        difference_type         idx;
+        size_type               idx;
 
         if (position == end() - 1)
         {
@@ -370,7 +370,7 @@ namespace ft {
 	typename vector<T, Allocator>::iterator		vector<T, Allocator>::erase(iterator first, iterator last)
 	{
 		vector<T, Allocator>    tmp;
-		difference_type         idx;
+		size_type               idx;
 		size_type               n;
 
 		if (first == last)
