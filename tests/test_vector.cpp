@@ -98,6 +98,7 @@ TEST_F(VectorOperator, OutOfBounds) {
 	EXPECT_EXIT( value = _my_vector->at(0), ::testing::KilledBySignal(SIGSEGV), "");
 	_my_vector = new ft::vector<int>(_test_size);
 	EXPECT_THROW( value = _my_vector->at(_test_size + 1), std::out_of_range);
+    (void)value;
 }
 
 TEST_F(VectorOperator, Assignment) {

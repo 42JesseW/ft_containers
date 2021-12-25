@@ -11,10 +11,10 @@ namespace ft {
     class BidirectionalIterator : public RandomAccessIterator<T, Category>
     {
     public:
-        typedef T						            value_type;
-        typedef value_type&				            reference;
-        typedef value_type*				            pointer;
-        typedef size_t					            size_type;
+        typedef T                                   value_type;
+        typedef value_type&                         reference;
+        typedef value_type*                         pointer;
+        typedef size_t                              size_type;
         typedef RandomAccessIterator<T, Category>   iter;
         typedef BidirectionalIterator               self_type;
 
@@ -28,15 +28,15 @@ namespace ft {
         virtual ~BidirectionalIterator();
 
         /* operators */
-        self_type&		operator = (const self_type &rhs);
-        bool			operator == (const self_type &rhs);
-        bool			operator != (const self_type &rhs);
-        reference		operator * ();
-        pointer			operator -> ();
-        self_type		operator ++ (int);
-        self_type&		operator ++ ();
-        self_type		operator -- (int);
-        self_type&		operator -- ();
+        self_type&  operator = (const self_type &rhs);
+        bool        operator == (const self_type &rhs);
+        bool        operator != (const self_type &rhs);
+        reference   operator * ();
+        pointer     operator -> ();
+        self_type   operator ++ (int);
+        self_type&  operator ++ ();
+        self_type   operator -- (int);
+        self_type&  operator -- ();
 
     };
 
@@ -44,10 +44,10 @@ namespace ft {
     class ConstBidirectionalIterator : public ConstRandomAccessIterator<T, Category>
     {
     public:
-        typedef T						                value_type;
-        typedef value_type&				                reference;
-        typedef value_type*				                pointer;
-        typedef size_t					                size_type;
+        typedef T                                       value_type;
+        typedef value_type&                             reference;
+        typedef value_type*                             pointer;
+        typedef size_t                                  size_type;
         typedef ConstRandomAccessIterator<T, Category>  iter;
         typedef ConstBidirectionalIterator              self_type;
 
@@ -61,10 +61,10 @@ namespace ft {
         virtual ~ConstBidirectionalIterator();
 
         /* operators */
-        self_type&		operator = (const self_type &rhs);
-        self_type&		operator = (const BidirectionalIterator<T, Category> &rhs);
-        reference		operator * ();
-        pointer			operator -> ();
+        self_type&  operator = (const self_type &rhs);
+        self_type&  operator = (const BidirectionalIterator<T, Category> &rhs);
+        reference   operator * ();
+        pointer     operator -> ();
 
     };
 
