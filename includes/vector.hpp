@@ -18,28 +18,26 @@ namespace ft {
 	{
 	public:
 		/* member types */
-		typedef T								value_type;
-		typedef Allocator						allocator_type;
-		typedef T&								reference;
-		typedef const T&						const_reference;
-		typedef T*								pointer;
-		typedef const T*						const_pointer;
+		typedef T								    value_type;
+		typedef Allocator						    allocator_type;
+		typedef T&								    reference;
+		typedef const T&						    const_reference;
+		typedef T*								    pointer;
+		typedef const T*						    const_pointer;
 
-		typedef RandomAccessIterator<T>			iterator;
-		typedef ConstRandomAccessIterator<T>	const_iterator;
-		typedef ConstRevRandomAccessIterator<T>	const_reverse_iterator;
-// TODO implement reverse_iterator template:    https://www.cplusplus.com/reference/iterator/reverse_iterator/
-        typedef reverse_iterator<iterator>		reverse_iterator;
-//        typedef reverse_iterator<const_iterator>	const_reverse_iterator;
+		typedef RandomAccessIterator<T>			    iterator;
+		typedef ConstRandomAccessIterator<T>	    const_iterator;
+        typedef reverse_iterator<const_iterator>    const_reverse_iterator;
+        typedef reverse_iterator<iterator>		    reverse_iterator;
 
-		typedef ptrdiff_t						difference_type;
-		typedef size_t							size_type;
+		typedef ptrdiff_t						    difference_type;
+		typedef size_t							    size_type;
 
 	private:
-		size_type								_size;
-		size_type								_capacity;
-		allocator_type							_allocator;
-		pointer									_array;
+		size_type								    _size;
+		size_type								    _capacity;
+		allocator_type							    _allocator;
+		pointer									    _array;
 
 	public:
 

@@ -174,40 +174,85 @@ TEST_F(VectorIterator, ForwardConst) {
 }
 
 TEST_F(VectorIterator, Reverse) {
-	_their_vector						= new std::vector<int>(_test_size, _test_val);
-	_my_vector							= new ft::vector<int>(_test_size, _test_val);
-	std::vector<int>::reverse_iterator 	std_begin;
-	std::vector<int>::reverse_iterator	std_end;
-	ft::vector<int>::reverse_iterator	ft_begin;
-	ft::vector<int>::reverse_iterator	ft_end;
+    _their_vector       = new std::vector<int>(_test_size);
+    _my_vector          = new ft::vector<int>(_test_size);
 
-	EXPECT_EQ(*(std_begin = _their_vector->rbegin()), *(ft_begin = _my_vector->rbegin()));
-	EXPECT_EQ(*(std_end = _their_vector->rend() - 1), *(ft_end = _my_vector->rend() - 1));
+    std::iota(_their_vector->begin(), _their_vector->end(), 0);
+    std::iota(_my_vector->begin(), _my_vector->end(), 0);
+    typedef std::vector<int>::iterator  their_iter_type;
+    typedef ft::vector<int>::iterator   my_iter_type;
 
-	auto ft_iter = _my_vector->rbegin();
-	auto std_iter = _their_vector->rbegin();
-	for (; ft_iter != _my_vector->rend() && std_iter != _their_vector->rend(); ++ft_iter, ++std_iter)
-		EXPECT_EQ(*ft_iter, *std_iter);
+    their_iter_type their_begin(_their_vector->begin());
+    their_iter_type their_end(_their_vector->end());
+    my_iter_type    my_begin(_my_vector->begin());
+    my_iter_type    my_end(_my_vector->end());
+
+    std::reverse_iterator<their_iter_type>  their_rev_begin(their_end);
+    std::reverse_iterator<their_iter_type>  their_rev_end(their_begin);
+    ft::reverse_iterator<my_iter_type>      my_rev_begin(my_end);
+    ft::reverse_iterator<my_iter_type>      my_rev_end(my_begin);
+
+    while (my_rev_begin != my_rev_end)
+    {
+        EXPECT_EQ(*my_rev_begin, *their_rev_begin);
+        ++my_rev_begin;
+        ++their_rev_begin;
+    }
 }
 
-TEST_F(VectorIterator, ReverseConst) {
-	auto _c_their_vector						= new const std::vector<int>(_test_size, _test_val);
-	auto _c_my_vector							= new const ft::vector<int>(_test_size, _test_val);
-	std::vector<int>::const_reverse_iterator 	std_begin;
-	std::vector<int>::const_reverse_iterator	std_end;
-	ft::vector<int>::const_reverse_iterator		ft_begin;
-	ft::vector<int>::const_reverse_iterator		ft_end;
+// TODO rewrite using reverse_iterator
+//TEST_F(VectorIterator, ReverseConst) {
+//	auto _c_their_vector						= new const std::vector<int>(_test_size, _test_val);
+//	auto _c_my_vector							= new const ft::vector<int>(_test_size, _test_val);
+//	std::vector<int>::const_reverse_iterator 	std_begin;
+//	std::vector<int>::const_reverse_iterator	std_end;
+//	ft::vector<int>::const_reverse_iterator		ft_begin;
+//	ft::vector<int>::const_reverse_iterator		ft_end;
+//
+//	EXPECT_EQ(*(std_begin = _c_their_vector->rbegin()), *(ft_begin = _c_my_vector->rbegin()));
+//	EXPECT_EQ(*(std_end = _c_their_vector->rend() - 1), *(ft_end = _c_my_vector->rend() - 1));
+//
+//	auto ft_iter = _c_my_vector->rbegin();
+//	auto std_iter = _c_their_vector->rbegin();
+//	for (; ft_iter != _c_my_vector->rend() && std_iter != _c_their_vector->rend(); ++ft_iter, ++std_iter)
+//		EXPECT_EQ(*ft_iter, *std_iter);
+//	delete _c_their_vector;
+//	delete _c_my_vector;
+//}
 
-	EXPECT_EQ(*(std_begin = _c_their_vector->rbegin()), *(ft_begin = _c_my_vector->rbegin()));
-	EXPECT_EQ(*(std_end = _c_their_vector->rend() - 1), *(ft_end = _c_my_vector->rend() - 1));
+TEST_F(VectorIterator, ConstReverse) {
+    _their_vector       = new std::vector<int>(_test_size);
+    _my_vector          = new ft::vector<int>(_test_size);
 
-	auto ft_iter = _c_my_vector->rbegin();
-	auto std_iter = _c_their_vector->rbegin();
-	for (; ft_iter != _c_my_vector->rend() && std_iter != _c_their_vector->rend(); ++ft_iter, ++std_iter)
-		EXPECT_EQ(*ft_iter, *std_iter);
-	delete _c_their_vector;
-	delete _c_my_vector;
+    std::iota(_their_vector->begin(), _their_vector->end(), 0);
+    std::iota(_my_vector->begin(), _my_vector->end(), 0);
+
+    auto _c_their_vector    = new const std::vector<int>(_their_vector->begin(), _their_vector->end());
+    auto _c_my_vector       = new const ft::vector<int>(_my_vector->begin(), _my_vector->end());
+
+    typedef std::vector<int>::const_iterator their_iter_type;
+    typedef ft::vector<int>::const_iterator  my_iter_type;
+
+    their_iter_type their_begin(_c_their_vector->begin());
+    their_iter_type their_end(_c_their_vector->end());
+    my_iter_type    my_begin(_c_my_vector->begin());
+    my_iter_type    my_end(_c_my_vector->end());
+
+    std::reverse_iterator<their_iter_type>  their_rev_begin(their_end);
+    std::reverse_iterator<their_iter_type>  their_rev_end(their_begin);
+    ft::reverse_iterator<my_iter_type>      my_rev_begin(my_end);
+    ft::reverse_iterator<my_iter_type>      my_rev_end(my_begin);
+
+    while (my_rev_begin != my_rev_end)
+    {
+        EXPECT_EQ(*my_rev_begin, *their_rev_begin);
+        ++my_rev_begin;
+        ++their_rev_begin;
+    }
+    delete _c_their_vector;
+    delete _c_my_vector;
 }
+
 
 /*
 ** ( CAPACITY )

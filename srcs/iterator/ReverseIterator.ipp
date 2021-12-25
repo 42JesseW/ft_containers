@@ -20,7 +20,7 @@ namespace ft {
         return (_base);
     }
 
-    /* http://www.cplusplus.com/reference/iterator/reverse_iterator/operator */
+    /* http://www.cplusplus.com/reference/iterator/reverse_iterator/operator* */
     template <class Iterator>
     typename reverse_iterator<Iterator>::reference      reverse_iterator<Iterator>::operator * () const
     {
