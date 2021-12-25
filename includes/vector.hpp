@@ -25,7 +25,7 @@ namespace ft {
         typedef T*                                      pointer;
         typedef const T*                                const_pointer;
         typedef RandomAccessIterator<T>                 iterator;
-        typedef ConstRandomAccessIterator<T>            const_iterator;
+        typedef RandomAccessIterator<const T>           const_iterator;
         typedef ft::reverse_iterator<const_iterator>    const_reverse_iterator;
         typedef ft::reverse_iterator<iterator>          reverse_iterator;
         typedef ptrdiff_t                               difference_type;
