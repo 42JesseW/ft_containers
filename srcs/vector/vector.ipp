@@ -58,7 +58,6 @@ namespace ft {
             for (size_type i = 0; i < rhs.size(); ++i)
                 _allocator.construct(_array + i, rhs[i]);
             _size = rhs.size();
-            std::allocator<int>::template rebind<float>::other allocator;
         }
         return (*this);
     }
