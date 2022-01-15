@@ -44,6 +44,7 @@ namespace ft {
     template <class T, class Allocator>
     vector<T, Allocator>::~vector()
     {
+    	clear();
         _allocator.deallocate(_array, _capacity);
     }
 
@@ -183,9 +184,9 @@ namespace ft {
         if (n > _capacity)
         {
             _new_array = _safe_alloc(n);
-            for (size_type i = 0; i < _size; ++i)
-                _allocator.construct(_new_array + i, _array[i]);
-            for (size_type i = 0; i < _size; ++i)
+            for (size_type i = 0; i < _size; i++)
+            	_allocator.construct(_new_array + i, _array[i]);
+            for (size_type i = 0; i < _size; i++)
                 _allocator.destroy(_array + i);
             _allocator.deallocate(_array, _capacity);
             _array = _new_array;
@@ -261,7 +262,7 @@ namespace ft {
     void    vector<T, Allocator>::push_back(const value_type& val)
     {
         if (_size == _capacity)
-            this->reserve((!_capacity) ? 1 : _capacity * 2);
+            this->reserve(_get_next_capacity());
         ++_size;
         _allocator.construct(_array + (_size - 1), val);
     }
@@ -277,63 +278,43 @@ namespace ft {
     template <class T, class Allocator>
     typename vector<T, Allocator>::iterator     vector<T, Allocator>::insert(iterator position, const value_type &val)
     {
-        iterator        start;
-        iterator        it;
-        difference_type idx;
-        bool            at_end;
+		difference_type	insert_idx;
 
-        idx = position - begin();
-        at_end = (position == end());
-        if (_size == _capacity)
-            this->reserve(_capacity * 2);
-        ++_size;
-        if (at_end)
-        {
-            _allocator.construct(_array + (_size - 1), val);
-            return (end() - 1);
-        }
-        start = begin() + idx;
-        it = start + 1;
-        while (it != end())
-        {
-            _allocator.construct(_array + (it - begin()), *(it - 1));
-            ++it;
-        }
-        _allocator.construct(_array + (start - begin()), val);
-        return (start);
+		insert_idx = position - begin();
+        insert(position, 1, val);
+        return (begin() + insert_idx);
     }
 
     template <class T, class Allocator>
     void    vector<T, Allocator>::insert(iterator position, size_type n, const value_type &val)
     {
-        iterator    start;
-        iterator    end;
-        size_type    idx;
+    	vector<T>	temp;
+        size_type	insert_idx;
 
-        _size += n;
-        idx = position - begin();
-        /* check for extra needed capacity */
-        if (_size > _capacity)
-            this->reserve(_get_next_capacity());
-        /* if insert is not at end, move all elements before it first */
-        if (idx != (_size - n))
-        {
-            end = begin() + idx + (n * 2) + 1;
-            start = begin() + idx + n;
-            while (start != end)
-            {
-                _allocator.construct(_array + (start - begin()), *(start - n));
-                ++start;
-            }
-        }
-        /* insert new elements */
-        end = begin() + idx + n;
-        start = begin() + idx;
-        while (start != end)
-        {
-            _allocator.construct(_array + (start - begin()), val);
-            ++start;
-        }
+		insert_idx = position - begin();
+		/* check for extra needed capacity */
+		if (_size + n > _capacity)
+			this->reserve(_get_next_capacity());
+
+        if (insert_idx < _size)
+		{
+        	difference_type push_back_amount = _size - insert_idx;
+        	for (int i = 0; i < push_back_amount; i++) {
+				temp.push_back(back());
+				pop_back();
+			}
+		}
+
+        /* insert new values at pos {idx} */
+        for (size_type i = 0; i < n; i++) {
+			push_back(val);
+		}
+
+        /* insert old elements */
+		while (!temp.empty()) {
+			push_back(temp.back());
+			temp.pop_back();
+		}
     }
 
     /*  Removes from the vector either a single element (position) or a range of elements ([first,last)). */
@@ -433,10 +414,13 @@ namespace ft {
     template <class T, class Allocator>
     typename vector<T, Allocator>::size_type    vector<T, Allocator>::_get_next_capacity()
     {
-        double  capacity_diff;
-
-        capacity_diff = static_cast<double>(_size) / static_cast<double>(_capacity);
-        return ((!_capacity) ? _size : _capacity * static_cast<int>(std::ceil(capacity_diff)));
+    	// TODO dafuq is this bs ??
+//        double  capacity_diff;
+//
+//        if (_capacity == 0)
+//        	return (1);
+//        capacity_diff = static_cast<double>(_size) / static_cast<double>(_capacity);
+        return (_size + 1);
     }
 
     /*

@@ -124,35 +124,35 @@ namespace ft {
                                                    InputIterator last,
                                                    typename iterator_check<InputIterator>::type* = 0)
         {
-            iterator  start;
-            iterator  end;
-            size_type n;
-            size_type idx;
+			vector<T>	temp;
+			size_type	n;
+			size_type	insert_idx;
 
-            n = last - first;
-            _size += n;
-            idx = position - begin();
-            /* check for extra capacity */
-            if (_size > _capacity)
-                this->reserve(_get_next_capacity());
-            if (idx != (_size - n))
-            {
-                end = begin() + idx + (n * 2) + 1;
-                start = begin() + idx + n;
-                while (start != end)
-                {
-                    _allocator.construct(_array + (start - begin()), *(start - n));
-                    ++start;
-                }
-            }
-            /* insert new elements */
-            start = begin() + idx;
-            while (first != last)
-            {
-                _allocator.construct(_array + (start - begin()), *first);
-                ++start;
-                ++first;
-            }
+			insert_idx = position - begin();
+			if (insert_idx < _size)
+			{
+				difference_type push_back_amount = _size - insert_idx;
+				for (int i = 0; i < push_back_amount; i++) {
+					temp.push_back(back());
+					pop_back();
+				}
+			}
+
+			n = last - first;
+			/* check for extra needed capacity */
+			if (_size + n > _capacity)
+				this->reserve(_get_next_capacity());
+
+			/* insert new values at pos {idx} */
+			for (;first != last; first++) {
+				push_back(*first);
+			}
+
+			/* insert old elements */
+			while (!temp.empty()) {
+				push_back(temp.back());
+				temp.pop_back();
+			}
         }
         iterator                            erase(iterator position);
         iterator                            erase(iterator first, iterator last);

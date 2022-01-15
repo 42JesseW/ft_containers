@@ -372,13 +372,13 @@ TEST_F(VectorModifiers, insertrange) {
     std::iota(my_fillWith.begin(), my_fillWith.end(), 0);
     _their_vector->insert(_their_vector->begin(), their_fillWith.begin(), their_fillWith.begin() + (_test_size * 0.5));
     _my_vector->insert(_my_vector->begin(), my_fillWith.begin(), my_fillWith.begin() + (_test_size * 0.5));
-//    check_array_data_equal();
-    _their_vector->insert(_their_vector->begin(), their_fillWith.begin(), their_fillWith.end());
-//    _my_vector->insert(_my_vector->begin() + (_test_size * 0.5), my_fillWith.begin(), my_fillWith.begin() + (_test_size * 0.25));
-//    check_array_data_equal();
-//   _their_vector->insert(_their_vector->end(), their_fillWith.begin(), their_fillWith.end());
-//    _my_vector->insert(_my_vector->end(), my_fillWith.begin(), my_fillWith.end());
-//    check_array_data_equal();
+    check_array_data_equal();
+    _their_vector->insert(_their_vector->begin(), their_fillWith.begin(), their_fillWith.begin() + (_test_size * 0.25));
+    _my_vector->insert(_my_vector->begin(), my_fillWith.begin(), my_fillWith.begin() + (_test_size * 0.25));
+    check_array_data_equal();
+    _their_vector->insert(_their_vector->end(), their_fillWith.begin(), their_fillWith.end());
+    _my_vector->insert(_my_vector->end(), my_fillWith.begin(), my_fillWith.end());
+    check_array_data_equal();
 }
 
 TEST_F(VectorModifiers, eraseSingle) {
